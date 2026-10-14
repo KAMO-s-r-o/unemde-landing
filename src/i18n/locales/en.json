@@ -78,7 +78,10 @@
   "footer": {
     "note": "Guests and venues · local deals · on-site activation",
     "rights": "© 2026 UNEMDE",
-    "linkedin": "LinkedIn"
+    "privacy": "Privacy policy",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "tiktok": "TikTok"
   },
   "guest": {
     "title": "Local deals you can actually use.",
@@ -108,7 +111,8 @@
     "j9p": "Heart a venue to find it later. Saved places and their live deals, ready for the next visit.",
     "storeTitle": "Get the app",
     "storeApp": "Download on the App Store",
-    "storePlay": "Get it on Google Play"
+    "storePlay": "Get it on Google Play",
+    "storeAndroid": "Download for Android"
   },
   "biz": {
     "title": "Counter, calendar, and deals in one venue app",

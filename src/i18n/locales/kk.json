@@ -78,7 +78,10 @@
   "footer": {
     "note": "Қонақтар мен мекемелер · жергілікті акциялар · орнында белсендіру",
     "rights": "© 2026 UNEMDE",
-    "linkedin": "LinkedIn"
+    "privacy": "Құпиялылық саясаты",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "tiktok": "TikTok"
   },
   "guest": {
     "title": "Шынымен пайдаланатын жергілікті акциялар",
@@ -108,7 +111,8 @@
     "j9p": "Мекемені жүрекшемен сақтаңыз. Сүйікті орындар мен олардың тірі акциялары — бір тізімде.",
     "storeTitle": "Қолданбаны жүктеу",
     "storeApp": "App Store-дан жүктеу",
-    "storePlay": "Google Play-ден жүктеу"
+    "storePlay": "Google Play-ден жүктеу",
+    "storeAndroid": "Android-қа жүктеу"
   },
   "biz": {
     "title": "Касса, күнтізбе және акциялар — бір мекеме қолданбасында",
