@@ -3,6 +3,7 @@ import FaqItem from "../components/faq/FaqItem.astro";
 import HowJourney from "../components/home/HowJourney.astro";
 import ShotCarousel from "../components/home/ShotCarousel.astro";
 import PhoneShot from "../components/shared/PhoneShot.astro";
+import StoreBadges from "../components/shared/StoreBadges.astro";
 import Layout from "../layouts/Layout.astro";
 import {
   appCard,
@@ -17,9 +18,7 @@ import {
   benefitTitle,
   benefits,
   btnGhost,
-  btnGreen,
   btnOnDark,
-  btnPrimary,
   btnPrimaryEnd,
   check,
   checkList,
@@ -45,16 +44,20 @@ import {
 
 const guestShots = [
   "/imgs/unemde/u-loadscreen.jpg",
+  "/imgs/unemde/u-login-l.jpg",
   "/imgs/unemde/u-mainpage-l.jpg",
+  "/imgs/unemde/u-mappage-l.jpg",
   "/imgs/unemde/u-restaurantpage-l.jpg",
   "/imgs/unemde/u-mydeals-l.jpg",
+  "/imgs/unemde/u-completeddeals-l.jpg",
   "/imgs/unemde/u-rating-l.jpg",
 ];
 
 const venueShots = [
   "/imgs/unemde-business/ub-loadscreen.jpg",
+  "/imgs/unemde-business/ub-login-l.jpg",
   "/imgs/unemde-business/ub-restaurantdetails-l.jpg",
-  "/imgs/unemde-business/ub-bookingcalendar-l.jpg",
+  "/imgs/unemde-business/ub-restaurantdetailss-l.jpg",
   "/imgs/unemde-business/ub-scanner-l.jpg",
 ];
 ---
@@ -69,25 +72,25 @@ const venueShots = [
           slot, and redeem on-site. Venues manage offers and scan QR codes in UNEMDE Business.
         </p>
         <div class={heroCta}>
-          <a class={btnGhost} href="/guest" data-i18n="hero.ctaGuest">I’m a guest</a>
+          <a class={btnGhost} href="#how" data-i18n="hero.ctaGuest">I’m a guest</a>
           <a class={btnOnDark} href="/venue" data-i18n="hero.ctaBiz">I’m a venue</a>
         </div>
       </div>
       <div class={phones} aria-hidden="true">
-        <PhoneShot src="/imgs/unemde/u-mainpage-l.jpg" motion="a" />
-        <PhoneShot src="/imgs/unemde-business/ub-scanner-l.jpg" motion="b" />
+        <PhoneShot src="/imgs/unemde/u-mappage-l.jpg" motion="a" />
+        <PhoneShot src="/imgs/unemde/u-restaurantpage-l.jpg" motion="b" />
       </div>
     </div>
   </section>
 
-  <section class={sectionJourney} id="how">
+  <section class={`${sectionJourney} scroll-mt-[76px]`} id="how">
     <div class={wrapCenter}>
       <h2 class={h2Flush} data-i18n="how.homeTitle">From offer to enjoy</h2>
     </div>
     <HowJourney />
   </section>
 
-  <section class="overflow-visible pt-6 pb-3">
+  <section class="scroll-mt-[76px] overflow-visible pt-6 pb-3" id="download">
     <div class={wrapCenter}>
       <h2 class={h2Flush} data-i18n="home.chooseTitle">What we offer</h2>
     </div>
@@ -111,7 +114,7 @@ const venueShots = [
             </li>
           </ul>
           <div class={appCardFoot}>
-            <a class={btnPrimary} href="/guest" data-i18n="home.more">Learn more</a>
+            <StoreBadges />
           </div>
         </div>
         <ShotCarousel shots={guestShots} />
@@ -168,7 +171,7 @@ const venueShots = [
         </article>
       </div>
       <div class={sectionCta}>
-        <a class={btnGreen} href="/venue#partner-contact" data-i18n="home.partnerCta">Become a partner</a>
+        <a class={btnOnDark} href="/venue#partner-contact" data-i18n="home.partnerCta">Become a partner</a>
       </div>
     </div>
   </section>
