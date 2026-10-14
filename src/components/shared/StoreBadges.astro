@@ -1,5 +1,6 @@
 ---
-import { storeBadge } from "../../lib/ui";
+import { ANDROID_APK_URL, APPSTORE_URL, GOOGLEPLAY_URL } from "../../data/contacts";
+import { btnGreen, storeBadge } from "../../lib/ui";
 
 interface Props {
   class?: string;
@@ -8,23 +9,31 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<div class:list={["mt-5 flex flex-wrap items-center justify-center gap-3", className]}>
+<div class:list={["flex flex-wrap items-center gap-3", className]}>
   <a
     class={storeBadge}
-    href="#download"
+    href={APPSTORE_URL}
     data-i18n="guest.storeApp"
     data-i18n-attr="aria-label"
     aria-label="Download on the App Store"
   >
     <img class="h-12 w-auto" src="/imgs/app-store.jpg" alt="" />
   </a>
+  <!-- Google Play badge temporarily hidden
   <a
     class={storeBadge}
-    href="#download"
+    href={GOOGLEPLAY_URL}
     data-i18n="guest.storePlay"
     data-i18n-attr="aria-label"
     aria-label="Get it on Google Play"
   >
     <img class="h-12 w-auto" src="/imgs/google-play.jpg" alt="" />
   </a>
+  -->
+  <a
+    class={btnGreen}
+    href={ANDROID_APK_URL}
+    download="UNEMDE.apk"
+    data-i18n="guest.storeAndroid"
+  >Загрузить на андроид</a>
 </div>

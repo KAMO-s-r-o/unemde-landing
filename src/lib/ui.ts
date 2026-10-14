@@ -3,10 +3,10 @@ export const wrapPad = "relative mx-auto w-full max-w-[1440px] px-8 sm:px-12 nav
 export const wrapCenter = `${wrap} text-center`;
 
 export const btn =
-  "inline-flex items-center justify-center gap-2 rounded-btn px-6 py-3 text-base font-medium leading-[22px] min-h-[50px] transition duration-200 hover:-translate-y-px";
+  "inline-flex items-center justify-center gap-2 rounded-btn px-6 py-3 text-center text-base font-medium leading-[22px] min-h-[50px] transition duration-200 hover:-translate-y-px";
 export const btnPrimary = `${btn} bg-brand text-white shadow-card`;
 export const btnGhost = `${btn} border border-white/28 bg-white/14 text-white hover:bg-white/22`;
-export const btnOnDark = `${btn} bg-white text-blue-dark hover:shadow-[0_8px_24px_rgb(16_24_40/0.2)]`;
+export const btnOnDark = `${btn} bg-white text-blue-dark hover:shadow-[0_8px_24px_rgb(0_69_21/0.2)]`;
 export const btnGreen = `${btn} bg-green-grad text-white shadow-card`;
 export const btnPrimaryEnd = `${btnPrimary} shrink-0 self-end`;
 
@@ -85,15 +85,15 @@ export const shotImg = "h-full w-full object-cover object-top";
 export const howRoot = "mt-4 w-full";
 export const howPad = "px-8 pt-5 sm:px-12 nav:px-16";
 export const howScroll =
-  "how-journey-scroll w-full overflow-x-auto overscroll-x-contain [scrollbar-width:thin] [scrollbar-color:var(--color-blue-light)_rgb(70_107_185_/_0.12)] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[rgb(70_107_185/0.12)] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(90deg,var(--color-blue-dark),var(--color-blue-light))] [&::-webkit-scrollbar-thumb:hover]:bg-blue-mid";
+  "how-journey-scroll w-full overflow-x-auto overscroll-x-contain [scrollbar-width:thin] [scrollbar-color:var(--color-blue-light)_rgb(53_151_82_/_0.12)] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[rgb(53_151_82/0.12)] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[linear-gradient(90deg,var(--color-blue-dark),var(--color-blue-light))] [&::-webkit-scrollbar-thumb:hover]:bg-blue-mid";
 export const howStep =
   "how-step group relative aspect-[9/19] w-full cursor-pointer overflow-hidden rounded-[20px] border border-border bg-bg-soft pb-2 shadow-card transition duration-300 outline-none [-webkit-tap-highlight-color:transparent] motion-reduce:transition-none hover:-translate-y-1 focus:-translate-y-1 data-[open]:-translate-y-1 motion-reduce:hover:translate-y-0 motion-reduce:focus:translate-y-0 motion-reduce:data-[open]:translate-y-0";
 export const howShot =
-  "how-step-shot absolute inset-x-[18%] top-2.5 overflow-hidden rounded-[16px] bg-[#101820] p-[5px] shadow-[0_8px_24px_rgb(16_24_40/0.18)] transition-all duration-500 ease-out motion-reduce:transition-none group-hover:inset-0 group-focus:inset-0 group-data-[open]:inset-0 group-hover:rounded-[20px] group-focus:rounded-[20px] group-data-[open]:rounded-[20px] group-hover:p-0 group-focus:p-0 group-data-[open]:p-0 group-hover:shadow-none group-focus:shadow-none group-data-[open]:shadow-none";
+  "how-step-shot absolute inset-x-[18%] top-2.5 overflow-hidden rounded-[16px] bg-[#0c1a10] p-[5px] shadow-[0_8px_24px_rgb(0_69_21/0.18)] transition-all duration-500 ease-out motion-reduce:transition-none group-hover:inset-0 group-focus:inset-0 group-data-[open]:inset-0 group-hover:rounded-[20px] group-focus:rounded-[20px] group-data-[open]:rounded-[20px] group-hover:p-0 group-focus:p-0 group-data-[open]:p-0 group-hover:shadow-none group-focus:shadow-none group-data-[open]:shadow-none";
 export const howShotInner =
   "how-step-shot-inner h-full overflow-hidden rounded-[12px] group-hover:rounded-none group-focus:rounded-none group-data-[open]:rounded-none";
 export const howScrim =
-  "how-step-scrim pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,transparent_0%,transparent_48%,rgb(15_24_42/0.45)_68%,rgb(15_24_42/0.9)_100%)] opacity-0 transition-opacity duration-500 motion-reduce:transition-none group-hover:opacity-100 group-focus:opacity-100 group-data-[open]:opacity-100";
+  "how-step-scrim pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,transparent_0%,transparent_48%,rgb(0_45_18/0.45)_68%,rgb(0_45_18/0.9)_100%)] opacity-0 transition-opacity duration-500 motion-reduce:transition-none group-hover:opacity-100 group-focus:opacity-100 group-data-[open]:opacity-100";
 export const howCaption =
   "how-step-caption absolute inset-x-0 bottom-0 z-10 flex flex-col justify-center bg-white text-text transition-all duration-500 motion-reduce:transition-none group-hover:min-h-0 group-focus:min-h-0 group-data-[open]:min-h-0 group-hover:justify-end group-focus:justify-end group-data-[open]:justify-end group-hover:bg-transparent group-focus:bg-transparent group-data-[open]:bg-transparent group-hover:pt-10 group-focus:pt-10 group-data-[open]:pt-10 group-hover:pb-3.5 group-focus:pb-3.5 group-data-[open]:pb-3.5 group-hover:text-white group-focus:text-white group-data-[open]:text-white";
 export const howText =
