@@ -6,7 +6,7 @@ interface Props {
 
 const { gradId, light = false } = Astro.props;
 const fill = light ? "#FFFFFF" : `url(#${gradId})`;
-const mark = light ? "#9EB6E8" : "#314B82";
+const mark = light ? "#A8D4B4" : "#1A6E33";
 ---
 
 <span class="grid size-9 place-items-center overflow-hidden rounded-[10px] bg-brand">
@@ -15,8 +15,8 @@ const mark = light ? "#9EB6E8" : "#314B82";
 <svg class:list={[light ? "h-7 w-[74px]" : "block h-8 w-[84px]"]} viewBox="0 0 313 120" aria-hidden="true">
   <defs>
     <linearGradient id={gradId} x1="157" y1="36.48" x2="157" y2="88.8">
-      <stop offset="0" stop-color="#1F3053" />
-      <stop offset="1" stop-color="#456BB9" />
+      <stop offset="0" stop-color="#004515" />
+      <stop offset="1" stop-color="#359752" />
     </linearGradient>
   </defs>
   <path
