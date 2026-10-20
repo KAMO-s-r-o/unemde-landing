@@ -1,0 +1,7 @@
+node_modules
+dist
+.astro
+.git
+.DS_Store
+# Large downloads are not served from the web server; link to them where they are hosted instead.
+public/downloads
