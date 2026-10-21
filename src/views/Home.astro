@@ -49,22 +49,22 @@ const faqHref = localePath(lang, "faq");
 const partnerHref = localePath(lang, "venue#partner-contact");
 
 const guestShots = [
-  "/imgs/unemde/u-loadscreen.jpg",
-  "/imgs/unemde/u-login-l.jpg",
-  "/imgs/unemde/u-mainpage-l.jpg",
-  "/imgs/unemde/u-mappage-l.jpg",
-  "/imgs/unemde/u-restaurantpage-l.jpg",
-  "/imgs/unemde/u-mydeals-l.jpg",
-  "/imgs/unemde/u-completeddeals-l.jpg",
-  "/imgs/unemde/u-rating-l.jpg",
+  { src: "/imgs/unemde/u-loadscreen.jpg", alt: t("apps.gAlt1") },
+  { src: "/imgs/unemde/u-login-l.jpg", alt: t("apps.gAlt2") },
+  { src: "/imgs/unemde/u-mainpage-l.jpg", alt: t("apps.gAlt3") },
+  { src: "/imgs/unemde/u-mappage-l.jpg", alt: t("apps.gAlt4") },
+  { src: "/imgs/unemde/u-restaurantpage-l.jpg", alt: t("apps.gAlt5") },
+  { src: "/imgs/unemde/u-mydeals-l.jpg", alt: t("apps.gAlt6") },
+  { src: "/imgs/unemde/u-completeddeals-l.jpg", alt: t("apps.gAlt7") },
+  { src: "/imgs/unemde/u-rating-l.jpg", alt: t("apps.gAlt8") },
 ];
 
 const venueShots = [
-  "/imgs/unemde-business/ub-loadscreen.jpg",
-  "/imgs/unemde-business/ub-login-l.jpg",
-  "/imgs/unemde-business/ub-restaurantdetails-l.jpg",
-  "/imgs/unemde-business/ub-restaurantdetailss-l.jpg",
-  "/imgs/unemde-business/ub-scanner-l.jpg",
+  { src: "/imgs/unemde-business/ub-loadscreen.jpg", alt: t("apps.bAlt1") },
+  { src: "/imgs/unemde-business/ub-login-l.jpg", alt: t("apps.bAlt2") },
+  { src: "/imgs/unemde-business/ub-restaurantdetails-l.jpg", alt: t("apps.bAlt3") },
+  { src: "/imgs/unemde-business/ub-restaurantdetailss-l.jpg", alt: t("apps.bAlt4") },
+  { src: "/imgs/unemde-business/ub-scanner-l.jpg", alt: t("apps.bAlt5") },
 ];
 ---
 
@@ -78,9 +78,9 @@ const venueShots = [
         <a class={btnOnDark} href={venueHref}>{t("hero.ctaBiz")}</a>
       </div>
     </div>
-    <div class={phones} aria-hidden="true">
-      <PhoneShot src="/imgs/unemde/u-mappage-l.jpg" motion="a" />
-      <PhoneShot src="/imgs/unemde/u-restaurantpage-l.jpg" motion="b" />
+    <div class={phones}>
+      <PhoneShot src="/imgs/unemde/u-mappage-l.jpg" alt={t("hero.shotMap")} motion="a" />
+      <PhoneShot src="/imgs/unemde/u-restaurantpage-l.jpg" alt={t("hero.shotVenue")} motion="b" />
     </div>
   </div>
 </section>
@@ -143,7 +143,7 @@ const venueShots = [
           <a class={btnGhost} href={venueHref}>{t("home.more")}</a>
         </div>
       </div>
-      <ShotCarousel shots={venueShots} alt />
+      <ShotCarousel shots={venueShots} onDark />
     </article>
   </div>
 </section>

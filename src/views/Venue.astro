@@ -46,8 +46,8 @@ const t = useTranslations(Astro.currentLocale);
         <a class={btnOnDark} href="#partner-contact">{t("home.partnerCta")}</a>
       </div>
     </div>
-    <div class={phonesSolo} aria-hidden="true">
-      <PhoneShot src="/imgs/unemde-business/ub-loadscreen.jpg" motion="solo" />
+    <div class={phonesSolo}>
+      <PhoneShot src="/imgs/unemde-business/ub-loadscreen.jpg" alt={t("hero.shotBiz")} motion="solo" />
     </div>
   </div>
 </section>

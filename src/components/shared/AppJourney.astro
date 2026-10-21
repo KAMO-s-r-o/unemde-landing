@@ -16,6 +16,7 @@ import {
 export type JourneyStep = {
   t: string;
   p: string;
+  alt: string;
   shot: string;
 };
 
@@ -41,7 +42,7 @@ const track = steps.length * 230;
               <article class={howStep} data-how-step tabindex="0">
                 <div class={`${howShot} bottom-[calc(32%+0.625rem)]`}>
                   <div class={howShotInner}>
-                    <img class={shotImg} src={s.shot} alt="" />
+                    <img class={shotImg} src={s.shot} alt={t(s.alt)} />
                   </div>
                 </div>
                 <div class={howScrim} aria-hidden="true" />

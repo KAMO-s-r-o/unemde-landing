@@ -12,20 +12,12 @@ const t = useTranslations(Astro.currentLocale);
 ---
 
 <div class:list={["flex flex-wrap items-center gap-3", className]}>
-  <a
-    class={storeBadge}
-    href={APPSTORE_URL}
-    aria-label={t("guest.storeApp")}
-  >
-    <img class="h-12 w-auto" src="/imgs/app-store.jpg" alt="" />
+  <a class={storeBadge} href={APPSTORE_URL}>
+    <img class="h-12 w-auto" src="/imgs/app-store.jpg" alt={t("guest.storeApp")} />
   </a>
   <!-- Google Play badge temporarily hidden
-  <a
-    class={storeBadge}
-    href={GOOGLEPLAY_URL}
-    aria-label={t("guest.storePlay")}
-  >
-    <img class="h-12 w-auto" src="/imgs/google-play.jpg" alt="" />
+  <a class={storeBadge} href={GOOGLEPLAY_URL}>
+    <img class="h-12 w-auto" src="/imgs/google-play.jpg" alt={t("guest.storePlay")} />
   </a>
   -->
   <a

@@ -19,21 +19,25 @@ const steps = [
   {
     t: "how.h2t",
     p: "how.h2p",
+    alt: "how.h2alt",
     shot: "/imgs/unemde/u-mappage-l.jpg",
   },
   {
     t: "how.h3t",
     p: "how.h3p",
+    alt: "how.h3alt",
     shot: "/imgs/unemde/u-restaurantpage-l.jpg",
   },
   {
     t: "how.h4t",
     p: "how.h4p",
+    alt: "how.h4alt",
     shot: "/imgs/unemde/u-mydeals-l.jpg",
   },
   {
     t: "how.h6t",
     p: "how.h6p",
+    alt: "how.h6alt",
     shot: "/imgs/unemde/u-rating-l.jpg",
   },
 ] as const;
@@ -66,7 +70,7 @@ const steps = [
                 {/* Phone frame — expands to full bleed on hover / focus / tap */}
                 <div class={`${howShot} bottom-[calc(34%+0.625rem)]`}>
                   <div class={howShotInner}>
-                    <img class={shotImg} src={s.shot} alt="" />
+                    <img class={shotImg} src={s.shot} alt={t(s.alt)} />
                   </div>
                 </div>
 
