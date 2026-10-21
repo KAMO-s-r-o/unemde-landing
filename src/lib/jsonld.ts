@@ -66,7 +66,7 @@ export function buildSiteJsonLd(site: URL | string, description: string) {
           price: "0",
           priceCurrency: "KZT",
         },
-        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL],
+        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL].filter(Boolean),
         downloadUrl: apkUrl,
         publisher: { "@id": orgId },
         author: { "@id": orgId },
