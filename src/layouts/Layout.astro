@@ -1,10 +1,9 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { ClientRouter } from "astro:transitions";
 import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
 import { LANGS, PAGE_META, type PageId } from "../i18n/config";
-import { getLang, pathWithoutLocale, useTranslations } from "../i18n/t";
+import { getLang, localeAbsoluteUrl, pathWithoutLocale, useTranslations } from "../i18n/t";
 import "../styles/global.css";
 
 interface Props {
@@ -19,7 +18,8 @@ const title = t(meta.titleKey);
 const description = t(meta.descKey);
 const path = pathWithoutLocale(Astro.url.pathname);
 const pathSeg = path === "/" ? "" : path.replace(/^\//, "");
-const canonical = new URL(getRelativeLocaleUrl(lang, pathSeg), Astro.site);
+const site = Astro.site!;
+const canonical = localeAbsoluteUrl(site, lang, pathSeg);
 ---
 
 <!doctype html>
@@ -35,14 +35,14 @@ const canonical = new URL(getRelativeLocaleUrl(lang, pathSeg), Astro.site);
         <link
           rel="alternate"
           hreflang={l}
-          href={new URL(getRelativeLocaleUrl(l, pathSeg), Astro.site)}
+          href={localeAbsoluteUrl(site, l, pathSeg)}
         />
       ))
     }
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL(getRelativeLocaleUrl("ru", pathSeg), Astro.site)}
+      href={localeAbsoluteUrl(site, "ru", pathSeg)}
     />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="theme-color" content="#004515" />

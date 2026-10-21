@@ -29,16 +29,28 @@ export function useTranslations(locale: string | undefined) {
   return (key: string) => t(lang, key);
 }
 
-/** Path without /kk or /en prefix, always starting with / (or empty segment for home). */
+/** Strip trailing slashes except for `/`. */
+export function stripTrailingSlash(pathname: string): string {
+  if (pathname === "/" || pathname === "") return "/";
+  return pathname.replace(/\/+$/, "");
+}
+
+/** Path without /kk or /en prefix, always starting with /; no trailing slash (except `/`). */
 export function pathWithoutLocale(pathname: string): string {
-  const stripped = pathname.replace(/^\/(kk|en)(?=\/|$)/, "");
+  const stripped = stripTrailingSlash(pathname.replace(/^\/(kk|en)(?=\/|$)/, ""));
   return stripped || "/";
 }
 
-/** Locale-aware href. `path` is like "", "venue", "faq", or "venue#partner-contact". */
+/** Locale-aware href without trailing slash. `path`: "", "venue", "faq", or "venue#partner-contact". */
 export function localePath(locale: string, path = ""): string {
   const [rawPath, hash] = path.split("#");
   const segment = rawPath.replace(/^\//, "");
-  const url = getRelativeLocaleUrl(locale, segment);
+  const url = stripTrailingSlash(getRelativeLocaleUrl(locale, segment));
   return hash ? `${url}#${hash}` : url;
+}
+
+/** Absolute locale URL for canonical / hreflang (no trailing slash). */
+export function localeAbsoluteUrl(site: URL | string, locale: string, pathSeg = ""): string {
+  const href = new URL(localePath(locale, pathSeg), site).href;
+  return href.endsWith("/") && href !== new URL("/", site).href ? href.slice(0, -1) : href;
 }
