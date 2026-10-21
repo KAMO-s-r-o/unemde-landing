@@ -1,4 +1,5 @@
 ---
+import { useTranslations } from "../../i18n/t";
 import {
   howCaption,
   howPad,
@@ -15,9 +16,8 @@ import {
 export type JourneyStep = {
   t: string;
   p: string;
+  alt: string;
   shot: string;
-  title: string;
-  text: string;
 };
 
 interface Props {
@@ -25,6 +25,7 @@ interface Props {
 }
 
 const { steps } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 const track = steps.length * 230;
 ---
 
@@ -41,17 +42,13 @@ const track = steps.length * 230;
               <article class={howStep} data-how-step tabindex="0">
                 <div class={`${howShot} bottom-[calc(32%+0.625rem)]`}>
                   <div class={howShotInner}>
-                    <img class={shotImg} src={s.shot} alt="" />
+                    <img class={shotImg} src={s.shot} alt={t(s.alt)} />
                   </div>
                 </div>
                 <div class={howScrim} aria-hidden="true" />
                 <div class={`${howCaption} min-h-[32%] px-4 py-3.5`}>
-                  <h3 class="text-base leading-tight font-bold" data-i18n={s.t}>
-                    {s.title}
-                  </h3>
-                  <p class={`${howText} text-xs leading-[1.35]`} data-i18n={s.p}>
-                    {s.text}
-                  </p>
+                  <h3 class="text-base leading-tight font-bold">{t(s.t)}</h3>
+                  <p class={`${howText} text-xs leading-[1.35]`}>{t(s.p)}</p>
                 </div>
               </article>
             </li>

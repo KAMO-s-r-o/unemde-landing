@@ -1,12 +1,6 @@
 import AOS from "aos";
-import i18next from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import en from "../i18n/locales/en.json";
-import kk from "../i18n/locales/kk.json";
-import ru from "../i18n/locales/ru.json";
-import { DEFAULT_LANG, LANGS, LANG_OPTIONS, type Lang } from "../i18n/config";
+import { DEFAULT_LANG, LANGS } from "../i18n/config";
 
-let i18nReady = false;
 let listenersBound = false;
 let aosReady = false;
 const journeyTimers: number[] = [];
@@ -17,54 +11,32 @@ function clearTimers(ids: number[]) {
   ids.length = 0;
 }
 
+function pathSegFromLocation(): string {
+  return window.location.pathname.replace(/^\/(kk|en)(?=\/|$)/, "").replace(/^\//, "").replace(/\/$/, "");
+}
+
+function clientLocalePath(locale: string, pathSeg: string): string {
+  if (locale === DEFAULT_LANG) return pathSeg ? `/${pathSeg}` : "/";
+  return pathSeg ? `/${locale}/${pathSeg}` : `/${locale}`;
+}
+
+/** Header may persist across same-locale navigations — refresh lang URLs for the current page. */
+function syncLangSwitchHrefs() {
+  const pathSeg = pathSegFromLocation();
+  document.querySelectorAll<HTMLAnchorElement>("#langMenu [data-lang]").forEach((a) => {
+    const lang = a.dataset.lang;
+    if (!lang || !(LANGS as readonly string[]).includes(lang)) return;
+    a.setAttribute("href", clientLocalePath(lang, pathSeg));
+  });
+}
+
 function syncActiveNav() {
-  const page = document.body.dataset.page;
+  const path = window.location.pathname.replace(/\/$/, "") || "/";
   document.querySelectorAll("#navLinks a, footer nav a").forEach((link) => {
-    const href = link.getAttribute("href");
-    const current = Boolean(page && href === `/${page}`);
+    const href = (link.getAttribute("href") ?? "").split("#")[0].replace(/\/$/, "") || "/";
+    const current = href === path;
     if (current) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
-  });
-}
-
-function applyI18n(refreshMotion = false) {
-  document.documentElement.lang = i18next.resolvedLanguage || DEFAULT_LANG;
-  const titleKey = document.body.dataset.titleKey || "meta.title";
-  document.title = i18next.t(titleKey);
-
-  const desc = document.querySelector('meta[name="description"]');
-  if (desc) {
-    const descKey = document.body.dataset.descKey || "meta.description";
-    desc.setAttribute("content", i18next.t(descKey));
-  }
-
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (!key) return;
-    const attr = el.getAttribute("data-i18n-attr");
-    const value = i18next.t(key);
-    if (attr) el.setAttribute(attr, value);
-    else el.textContent = value;
-  });
-
-  const langBtn = document.getElementById("langBtn");
-  const menuBtn = document.getElementById("menuBtn");
-  syncLangSwitch();
-  if (langBtn) langBtn.setAttribute("aria-label", i18next.t("nav.lang"));
-  if (menuBtn) menuBtn.setAttribute("aria-label", i18next.t("nav.menu"));
-  if (refreshMotion) AOS.refresh();
-}
-
-function langLabel(lang: string) {
-  return LANG_OPTIONS.find((item) => item.value === lang)?.label ?? "RU";
-}
-
-function syncLangSwitch() {
-  const lang = i18next.resolvedLanguage || DEFAULT_LANG;
-  const current = document.getElementById("langCurrent");
-  if (current) current.textContent = langLabel(lang);
-  document.querySelectorAll<HTMLElement>("[data-lang]").forEach((btn) => {
-    btn.setAttribute("aria-selected", String(btn.dataset.lang === lang));
   });
 }
 
@@ -168,41 +140,11 @@ function toggleLangMenu() {
 }
 
 function focusLangOption(offset: number) {
-  const options = [...document.querySelectorAll<HTMLElement>("[data-lang]")];
+  const options = [...document.querySelectorAll<HTMLElement>("#langMenu [data-lang]")];
   if (!options.length) return;
   const index = options.findIndex((el) => el === document.activeElement);
   const next = options[(index + offset + options.length) % options.length];
   next?.focus();
-}
-
-async function setLang(lang: string) {
-  if (!LANGS.includes(lang as Lang)) return;
-  await i18next.changeLanguage(lang);
-  localStorage.setItem("unemde-lang", lang);
-  applyI18n(true);
-}
-
-async function ensureI18n() {
-  if (i18nReady) return;
-  await i18next.use(LanguageDetector).init({
-    resources: {
-      ru: { translation: ru },
-      kk: { translation: kk },
-      en: { translation: en },
-    },
-    lng: DEFAULT_LANG,
-    fallbackLng: DEFAULT_LANG,
-    supportedLngs: [...LANGS],
-    nonExplicitSupportedLngs: true,
-    load: "languageOnly",
-    interpolation: { escapeValue: false },
-    detection: {
-      order: ["localStorage"],
-      lookupLocalStorage: "unemde-lang",
-      caches: ["localStorage"],
-    },
-  });
-  i18nReady = true;
 }
 
 function bindListeners() {
@@ -218,11 +160,10 @@ function bindListeners() {
       return;
     }
 
-    const langOption = target.closest<HTMLElement>("[data-lang]");
+    const langOption = target.closest<HTMLElement>("#langMenu [data-lang]");
     if (langOption?.dataset.lang) {
-      void setLang(langOption.dataset.lang);
+      localStorage.setItem("unemde-lang", langOption.dataset.lang);
       closeLangMenu();
-      document.getElementById("langBtn")?.focus();
       return;
     }
 
@@ -318,10 +259,10 @@ function bindListeners() {
       focusLangOption(-1);
     } else if (event.key === "Home") {
       event.preventDefault();
-      document.querySelector<HTMLElement>("[data-lang]")?.focus();
+      document.querySelector<HTMLElement>("#langMenu [data-lang]")?.focus();
     } else if (event.key === "End") {
       event.preventDefault();
-      const options = document.querySelectorAll<HTMLElement>("[data-lang]");
+      const options = document.querySelectorAll<HTMLElement>("#langMenu [data-lang]");
       options[options.length - 1]?.focus();
     }
   });
@@ -335,10 +276,9 @@ function bindListeners() {
   );
 }
 
-async function onPageLoad() {
-  await ensureI18n();
-  applyI18n();
+function onPageLoad() {
   syncActiveNav();
+  syncLangSwitchHrefs();
   closeLangMenu();
   closeNavMenu();
   bindListeners();
@@ -368,5 +308,5 @@ document.addEventListener("astro:before-swap", () => {
 });
 
 document.addEventListener("astro:page-load", () => {
-  void onPageLoad();
+  onPageLoad();
 });

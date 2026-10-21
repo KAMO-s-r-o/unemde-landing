@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "Sofia Pro";
-  src: url("/fonts/Sofia Pro Regular Az.otf") format("opentype");
+  src: url("/fonts/Sofia Pro Regular Az.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Sofia Pro";
-  src: url("/fonts/Sofia Pro Medium Az.otf") format("opentype");
+  src: url("/fonts/Sofia Pro Medium Az.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Sofia Pro";
-  src: url("/fonts/Sofia Pro Semi Bold Az.otf") format("opentype");
+  src: url("/fonts/Sofia Pro Semi Bold Az.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "Sofia Pro";
-  src: url("/fonts/Sofia Pro Bold Az.otf") format("opentype");
+  src: url("/fonts/Sofia Pro Bold Az.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

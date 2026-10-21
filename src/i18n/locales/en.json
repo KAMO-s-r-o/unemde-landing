@@ -21,28 +21,48 @@
     "title": "Discover the best offers around you with UNEMDE",
     "lead": "Find discounts, partner places, and exclusive deals in cafés, restaurants, beauty, sport, and more — all in one mobile app.",
     "ctaGuest": "I’m a guest",
-    "ctaBiz": "I’m a venue"
+    "ctaBiz": "I’m a venue",
+    "shotMap": "Map of nearby venues and deals",
+    "shotVenue": "Venue page with deal and booking",
+    "shotBiz": "UNEMDE Business splash screen"
   },
   "how": {
     "homeTitle": "From offer to enjoy",
     "h2t": "Choose",
     "h2p": "The guest finds the venue on the map or in the list and picks a deal that fits.",
+    "h2alt": "Map of nearby venues and deals",
     "h3t": "Book",
     "h3p": "A day and a time slot — the visit is planned, not a coupon for later.",
+    "h3alt": "Venue page with deal and booking",
     "h4t": "Arrive",
     "h4p": "The guest shows up. The booking is ready to activate on-site.",
+    "h4alt": "My Deals with a booked offer ready to activate",
     "h6t": "Enjoy",
-    "h6p": "The discount is applied. Dine in or takeaway — then save the venue for next time."
+    "h6p": "The discount is applied. Dine in or takeaway — then save the venue for next time.",
+    "h6alt": "Rate your visit screen"
   },
   "apps": {
     "gTitle": "For guests",
     "g1": "Sign in with a phone number",
     "g2": "Map, filters, rating",
     "g3": "30 minutes after activation",
+    "gAlt1": "UNEMDE splash screen",
+    "gAlt2": "Guest sign-in screen",
+    "gAlt3": "Deals list on the home screen",
+    "gAlt4": "Map of nearby venues and deals",
+    "gAlt5": "Venue page with deal and booking",
+    "gAlt6": "My Deals with booked offers",
+    "gAlt7": "Completed deals history",
+    "gAlt8": "Rate your visit screen",
     "bTitle": "For venues",
     "b1": "Camera for deal QR codes",
     "b2": "Booking calendar",
-    "b3": "Logo and opening hours"
+    "b3": "Logo and opening hours",
+    "bAlt1": "UNEMDE Business splash screen",
+    "bAlt2": "Venue app sign-in screen",
+    "bAlt3": "Venue storefront editor",
+    "bAlt4": "Venue deals and details",
+    "bAlt5": "QR code scanner at the counter"
   },
   "home": {
     "chooseTitle": "What we offer",
@@ -124,12 +144,16 @@
     "journeySub": "Every screen a venue uses — from sign-in to scanning a guest at the counter.",
     "j1t": "Sign in",
     "j1p": "Enter your phone number and confirm the code. New venues tap Sign Up to register the establishment.",
+    "j1alt": "Venue app sign-in screen",
     "j2t": "Edit your storefront",
     "j2p": "Name, photo, address, hours, payments. Create deals: 1+1, 30% off, coffee 2+1, quantity and terms.",
+    "j2alt": "Venue storefront and deals editor",
     "j3t": "Booking calendar",
     "j3p": "Pick a day and see slots: available or booked with guest name and deal. Who is coming, and when.",
+    "j3alt": "Booking calendar with time slots",
     "j4t": "Scan at the counter",
-    "j4p": "Allow the camera for the guest QR, or enter a code by hand. Activate — the discount runs until it expires."
+    "j4p": "Allow the camera for the guest QR, or enter a code by hand. Activate — the discount runs until it expires.",
+    "j4alt": "QR code scanner at the counter"
   },
   "faq": {
     "title": "Frequently Asked Questions",

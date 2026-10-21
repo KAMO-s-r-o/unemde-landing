@@ -2,7 +2,16 @@
 import { ClientRouter } from "astro:transitions";
 import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
-import { PAGE_META, type PageId } from "../i18n/config";
+import {
+  LANGS,
+  OG_IMAGE_PATH,
+  OG_LOCALES,
+  PAGE_META,
+  SITE_NAME,
+  type PageId,
+} from "../i18n/config";
+import { getLang, localeAbsoluteUrl, pathWithoutLocale, useTranslations } from "../i18n/t";
+import { buildSiteJsonLd } from "../lib/jsonld";
 import "../styles/global.css";
 
 interface Props {
@@ -10,21 +19,64 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 const meta = PAGE_META[page];
+const title = t(meta.titleKey);
+const description = t(meta.descKey);
+const path = pathWithoutLocale(Astro.url.pathname);
+const pathSeg = path === "/" ? "" : path.replace(/^\//, "");
+const site = Astro.site!;
+const canonical = localeAbsoluteUrl(site, lang, pathSeg);
+const ogImage = new URL(OG_IMAGE_PATH, site).href;
+const ogLocale = OG_LOCALES[lang];
+const jsonLd = buildSiteJsonLd(site, description);
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UNEMDE</title>
-    <meta name="description" content="UNEMDE local deals" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {
+      LANGS.map((l) => (
+        <link
+          rel="alternate"
+          hreflang={l}
+          href={localeAbsoluteUrl(site, l, pathSeg)}
+        />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={localeAbsoluteUrl(site, "ru", pathSeg)}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    {
+      LANGS.filter((l) => l !== lang).map((l) => (
+        <meta property="og:locale:alternate" content={OG_LOCALES[l]} />
+      ))
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="theme-color" content="#004515" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <ClientRouter />
   </head>
-  <body data-page={page} data-title-key={meta.titleKey} data-desc-key={meta.descKey}>
+  <body data-page={page}>
     <div class="mx-auto flex min-h-dvh w-full min-w-[320px] max-w-[1440px] flex-col">
       <Header page={page} />
       <main class="flex-1">

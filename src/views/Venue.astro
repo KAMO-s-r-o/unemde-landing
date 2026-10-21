@@ -1,0 +1,63 @@
+---
+import PhoneShot from "../components/shared/PhoneShot.astro";
+import PartnerSection from "../components/venue/PartnerSection.astro";
+import VenueJourney from "../components/venue/VenueJourney.astro";
+import { useTranslations } from "../i18n/t";
+import {
+  btnOnDark,
+  check,
+  checkList,
+  checkRow,
+  h2Flush,
+  hero,
+  heroCta,
+  heroTitle,
+  leadWide,
+  pageHeroGrid,
+  phonesSolo,
+  sectionJourney,
+  subMuted,
+  wrapCenter,
+} from "../lib/ui";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class={hero}>
+  <div class={pageHeroGrid}>
+    <div>
+      <h1 class={heroTitle}>{t("biz.title")}</h1>
+      <p class={leadWide}>{t("biz.sub")}</p>
+      <ul class={checkList}>
+        <li class={checkRow}>
+          <span class={check}>✓</span>
+          <span>{t("biz.b1")}</span>
+        </li>
+        <li class={checkRow}>
+          <span class={check}>✓</span>
+          <span>{t("biz.b2")}</span>
+        </li>
+        <li class={checkRow}>
+          <span class={check}>✓</span>
+          <span>{t("biz.b3")}</span>
+        </li>
+      </ul>
+      <div class={heroCta}>
+        <a class={btnOnDark} href="#partner-contact">{t("home.partnerCta")}</a>
+      </div>
+    </div>
+    <div class={phonesSolo}>
+      <PhoneShot src="/imgs/unemde-business/ub-loadscreen.jpg" alt={t("hero.shotBiz")} motion="solo" />
+    </div>
+  </div>
+</section>
+
+<section class={sectionJourney}>
+  <div class={wrapCenter}>
+    <h2 class={h2Flush}>{t("biz.journeyTitle")}</h2>
+    <p class={subMuted}>{t("biz.journeySub")}</p>
+  </div>
+  <VenueJourney />
+</section>
+
+<PartnerSection />

@@ -1,5 +1,12 @@
 ---
 import { LANG_OPTIONS } from "../../i18n/config";
+import { getLang, localePath, pathWithoutLocale, useTranslations } from "../../i18n/t";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const currentPath = pathWithoutLocale(Astro.url.pathname);
+const pathSeg = currentPath === "/" ? "" : currentPath.replace(/^\//, "");
+const currentLabel = LANG_OPTIONS.find((item) => item.value === lang)?.label ?? "RU";
 ---
 
 <div class="relative z-2" id="langSwitch">
@@ -10,11 +17,9 @@ import { LANG_OPTIONS } from "../../i18n/config";
     aria-haspopup="listbox"
     aria-expanded="false"
     aria-controls="langMenu"
-    data-i18n="nav.lang"
-    data-i18n-attr="aria-label"
-    aria-label="Language"
+    aria-label={t("nav.lang")}
   >
-    <span id="langCurrent">RU</span>
+    <span id="langCurrent">{currentLabel}</span>
     <svg
       class="block shrink-0 -translate-y-0.2 transition-transform duration-200 group-aria-expanded:rotate-180"
       viewBox="0 0 12 8"
@@ -35,15 +40,16 @@ import { LANG_OPTIONS } from "../../i18n/config";
     {
       LANG_OPTIONS.map((item) => (
         <li role="none">
-          <button
-            type="button"
+          <a
             class="flex min-h-9 w-full items-center justify-center rounded-xl px-3 text-left font-sans text-xs font-bold tracking-[0.04em] text-dark-gray hover:bg-blue-soft hover:text-blue-dark focus-visible:bg-blue-soft focus-visible:text-blue-dark focus-visible:outline-none aria-selected:bg-brand aria-selected:text-white aria-selected:hover:bg-brand aria-selected:hover:text-white aria-selected:focus-visible:bg-brand aria-selected:focus-visible:text-white"
             role="option"
+            href={localePath(item.value, pathSeg)}
             data-lang={item.value}
-            aria-selected="false"
+            aria-selected={item.value === lang ? "true" : "false"}
+            hreflang={item.value}
           >
             {item.label}
-          </button>
+          </a>
         </li>
       ))
     }

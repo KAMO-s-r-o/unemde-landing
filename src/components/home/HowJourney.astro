@@ -1,4 +1,5 @@
 ---
+import { useTranslations } from "../../i18n/t";
 import {
   howCaption,
   howPad,
@@ -12,42 +13,34 @@ import {
   shotImg,
 } from "../../lib/ui";
 
-const steps: {
-  t: string;
-  p: string;
-  shot: string;
-  title: string;
-  text: string;
-}[] = [
+const t = useTranslations(Astro.currentLocale);
+
+const steps = [
   {
     t: "how.h2t",
     p: "how.h2p",
+    alt: "how.h2alt",
     shot: "/imgs/unemde/u-mappage-l.jpg",
-    title: "Choose",
-    text: "The guest finds the venue on the map or in the list and picks a deal that fits.",
   },
   {
     t: "how.h3t",
     p: "how.h3p",
+    alt: "how.h3alt",
     shot: "/imgs/unemde/u-restaurantpage-l.jpg",
-    title: "Book",
-    text: "A day and a time slot — the visit is planned, not a coupon for later.",
   },
   {
     t: "how.h4t",
     p: "how.h4p",
+    alt: "how.h4alt",
     shot: "/imgs/unemde/u-mydeals-l.jpg",
-    title: "Arrive",
-    text: "The guest shows up. The booking is ready to activate on-site.",
   },
   {
     t: "how.h6t",
     p: "how.h6p",
+    alt: "how.h6alt",
     shot: "/imgs/unemde/u-rating-l.jpg",
-    title: "Enjoy",
-    text: "The discount is applied. Dine in or takeaway — then save the venue for next time.",
   },
-];
+] as const;
 ---
 
 <div class={howRoot}>
@@ -77,7 +70,7 @@ const steps: {
                 {/* Phone frame — expands to full bleed on hover / focus / tap */}
                 <div class={`${howShot} bottom-[calc(34%+0.625rem)]`}>
                   <div class={howShotInner}>
-                    <img class={shotImg} src={s.shot} alt="" />
+                    <img class={shotImg} src={s.shot} alt={t(s.alt)} />
                   </div>
                 </div>
 
@@ -86,12 +79,8 @@ const steps: {
 
                 {/* Caption: solid panel at rest → overlay when previewed */}
                 <div class={`${howCaption} min-h-[34%] px-3 py-3`}>
-                  <h3 class="text-[15px] leading-tight font-bold" data-i18n={s.t}>
-                    {s.title}
-                  </h3>
-                  <p class={`${howText} text-[11px] leading-4`} data-i18n={s.p}>
-                    {s.text}
-                  </p>
+                  <h3 class="text-[15px] leading-tight font-bold">{t(s.t)}</h3>
+                  <p class={`${howText} text-[11px] leading-4`}>{t(s.p)}</p>
                 </div>
               </article>
 

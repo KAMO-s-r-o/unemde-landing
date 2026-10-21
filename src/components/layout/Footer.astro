@@ -1,6 +1,7 @@
 ---
 import { NAV_LINKS, type PageId } from "../../i18n/config";
-import { INSTAGRAM_URL, LINKEDIN_URL, TIKTOK_URL } from "../../data/contacts";
+import { INSTAGRAM_URL, LINKEDIN_URL, PRIVACY_URL, TIKTOK_URL } from "../../data/contacts";
+import { getLang, localePath, useTranslations } from "../../i18n/t";
 import { logoLink, wrap } from "../../lib/ui";
 import Logo from "./Logo.astro";
 
@@ -9,6 +10,9 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const homeHref = localePath(lang);
 
 const socialLink =
   "inline-flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-white/28 bg-white/14 text-white transition duration-200 hover:-translate-y-px hover:bg-white/22";
@@ -17,18 +21,17 @@ const socialLink =
 <footer class="bg-blue-dark pt-8 pb-4 text-[13px] text-white/82" id="stores">
   <div class={`${wrap} flex items-center justify-between gap-x-6 max-[600px]:items-start`}>
     <nav class="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-3 font-semibold max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-y-2.5">
-      <a class={logoLink} href="/" aria-label="UNEMDE">
+      <a class={logoLink} href={homeHref} aria-label="UNEMDE">
         <Logo gradId="footGrad" light />
       </a>
       {
         NAV_LINKS.map((item) => (
           <a
             class="hover:text-white aria-[current=page]:text-white"
-            href={item.href}
+            href={localePath(lang, item.path)}
             aria-current={page === item.page ? "page" : undefined}
-            data-i18n={item.key}
           >
-            {item.label}
+            {t(item.key)}
           </a>
         ))
       }
@@ -39,9 +42,7 @@ const socialLink =
         href={LINKEDIN_URL}
         target="_blank"
         rel="noreferrer"
-        data-i18n="footer.linkedin"
-        data-i18n-attr="aria-label"
-        aria-label="LinkedIn"
+        aria-label={t("footer.linkedin")}
       >
         <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
@@ -54,9 +55,7 @@ const socialLink =
         href={INSTAGRAM_URL}
         target="_blank"
         rel="noreferrer"
-        data-i18n="footer.instagram"
-        data-i18n-attr="aria-label"
-        aria-label="Instagram"
+        aria-label={t("footer.instagram")}
       >
         <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
@@ -69,9 +68,7 @@ const socialLink =
         href={TIKTOK_URL}
         target="_blank"
         rel="noreferrer"
-        data-i18n="footer.tiktok"
-        data-i18n-attr="aria-label"
-        aria-label="TikTok"
+        aria-label={t("footer.tiktok")}
       >
         <svg class="size-[18px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
@@ -84,10 +81,8 @@ const socialLink =
   <div
     class={`${wrap} mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/12 pt-3 text-white/60 max-[600px]:flex-col max-[600px]:items-start`}
   >
-    <span data-i18n="footer.rights">© 2026 UNEMDE</span>
-    <a class="hover:text-white" href="/private-policy" data-i18n="footer.privacy">Privacy policy</a>
-    <span class="min-[601px]:ml-auto" data-i18n="footer.note">
-      Guests and venues · local deals · on-site activation
-    </span>
+    <span>{t("footer.rights")}</span>
+    <a class="hover:text-white" href={PRIVACY_URL} target="_blank" rel="noreferrer">{t("footer.privacy")}</a>
+    <span class="min-[601px]:ml-auto">{t("footer.note")}</span>
   </div>
 </footer>

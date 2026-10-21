@@ -1,5 +1,6 @@
 ---
-import { ANDROID_APK_URL, APPSTORE_URL, GOOGLEPLAY_URL } from "../../data/contacts";
+import { ANDROID_APK_URL, APPSTORE_URL } from "../../data/contacts";
+import { useTranslations } from "../../i18n/t";
 import { btnGreen, storeBadge } from "../../lib/ui";
 
 interface Props {
@@ -7,33 +8,21 @@ interface Props {
 }
 
 const { class: className = "" } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <div class:list={["flex flex-wrap items-center gap-3", className]}>
-  <a
-    class={storeBadge}
-    href={APPSTORE_URL}
-    data-i18n="guest.storeApp"
-    data-i18n-attr="aria-label"
-    aria-label="Download on the App Store"
-  >
-    <img class="h-12 w-auto" src="/imgs/app-store.jpg" alt="" />
+  <a class={storeBadge} href={APPSTORE_URL}>
+    <img class="h-12 w-auto" src="/imgs/app-store.jpg" alt={t("guest.storeApp")} />
   </a>
   <!-- Google Play badge temporarily hidden
-  <a
-    class={storeBadge}
-    href={GOOGLEPLAY_URL}
-    data-i18n="guest.storePlay"
-    data-i18n-attr="aria-label"
-    aria-label="Get it on Google Play"
-  >
-    <img class="h-12 w-auto" src="/imgs/google-play.jpg" alt="" />
+  <a class={storeBadge} href={GOOGLEPLAY_URL}>
+    <img class="h-12 w-auto" src="/imgs/google-play.jpg" alt={t("guest.storePlay")} />
   </a>
   -->
   <a
     class={btnGreen}
     href={ANDROID_APK_URL}
     download="UNEMDE.apk"
-    data-i18n="guest.storeAndroid"
-  >Загрузить на андроид</a>
+  >{t("guest.storeAndroid")}</a>
 </div>

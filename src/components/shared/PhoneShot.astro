@@ -3,10 +3,11 @@ import { shotImg } from "../../lib/ui";
 
 interface Props {
   src: string;
+  alt: string;
   motion: "a" | "b" | "solo";
 }
 
-const { src, motion } = Astro.props;
+const { src, alt, motion } = Astro.props;
 const pos =
   motion === "solo"
     ? "top-[8%] right-[8%] left-auto z-20 w-[62%] max-sm:top-[6%] max-sm:left-1/2 max-sm:right-auto max-sm:w-[52%] max-sm:-translate-x-1/2"
@@ -26,7 +27,7 @@ const frame =
     class={`phone-shot-frame aspect-[9/19] w-full overflow-hidden border border-white/18 bg-[#0c1a10] p-[3.6%] shadow-float ${frame}`}
   >
     <div class="phone-shot-screen h-full overflow-hidden bg-[#0e1728]">
-      <img class={shotImg} src={src} alt="" />
+      <img class={shotImg} src={src} alt={alt} />
     </div>
   </div>
 </div>
