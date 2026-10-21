@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://unemde.com/sitemap-index.xml
