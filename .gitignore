@@ -2,3 +2,5 @@ node_modules
 dist
 .astro
 .DS_Store
+# Hosted via GitHub Releases — do not commit APKs
+public/downloads/*.apk
