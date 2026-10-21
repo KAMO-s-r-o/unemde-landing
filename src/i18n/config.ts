@@ -12,8 +12,8 @@ export const PAGES = ["home", "venue", "faq"] as const;
 export type PageId = (typeof PAGES)[number];
 
 export const NAV_LINKS = [
-  { href: "/venue", key: "nav.business", page: "venue", label: "For venues" },
-  { href: "/faq", key: "nav.faq", page: "faq", label: "FAQ" },
+  { path: "venue", key: "nav.business", page: "venue" },
+  { path: "faq", key: "nav.faq", page: "faq" },
 ] as const;
 
 export const PAGE_META: Record<PageId, { titleKey: string; descKey: string }> = {

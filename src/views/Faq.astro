@@ -1,0 +1,56 @@
+---
+import { TELEGRAM_URL } from "../data/contacts";
+import FaqItem from "../components/faq/FaqItem.astro";
+import { useTranslations } from "../i18n/t";
+import { btnPrimaryEnd, chip, chipGreen, faqBody, faqCta, faqTitle, lead, pageHero, pageHeroTitle, wrap } from "../lib/ui";
+
+const t = useTranslations(Astro.currentLocale);
+
+const questions = [
+  { cat: "general", q: "faq.q1", a: "faq.a1" },
+  { cat: "general", q: "faq.q2", a: "faq.a2" },
+  { cat: "general", q: "faq.q3", a: "faq.a3" },
+  { cat: "deals", q: "faq.q4", a: "faq.a4" },
+  { cat: "deals", q: "faq.q5", a: "faq.a5" },
+  { cat: "deals", q: "faq.q6", a: "faq.a6" },
+  { cat: "deals", q: "faq.q7", a: "faq.a7" },
+  { cat: "account", q: "faq.q8", a: "faq.a8" },
+  { cat: "account", q: "faq.q9", a: "faq.a9" },
+  { cat: "account", q: "faq.q10", a: "faq.a10" },
+  { cat: "partners", q: "faq.q11", a: "faq.a11" },
+  { cat: "partners", q: "faq.q12", a: "faq.a12" },
+  { cat: "partners", q: "faq.q13", a: "faq.a13" },
+] as const;
+---
+
+<section class={pageHero}>
+  <div class={wrap}>
+    <h1 class={`${pageHeroTitle} mt-0`}>{t("faq.title")}</h1>
+    <p class={lead}>{t("faq.sub")}</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class={`${wrap} max-w-[760px]`}>
+    <div class="mb-5 flex flex-wrap gap-2">
+      <button type="button" class={chipGreen} data-faq-filter="all" aria-pressed="true">{t("faq.all")}</button>
+      <button type="button" class={chip} data-faq-filter="general" aria-pressed="false">{t("faq.general")}</button>
+      <button type="button" class={chip} data-faq-filter="deals" aria-pressed="false">{t("faq.deals")}</button>
+      <button type="button" class={chip} data-faq-filter="account" aria-pressed="false">{t("faq.account")}</button>
+      <button type="button" class={chip} data-faq-filter="partners" aria-pressed="false">{t("faq.partners")}</button>
+    </div>
+    <p class="mb-5 text-dark-gray" id="faqEmpty" hidden>{t("faq.empty")}</p>
+    <div class="grid grid-cols-1 gap-5">
+      {questions.map((item) => <FaqItem q={item.q} a={item.a} cat={item.cat} />)}
+      <article class={faqCta}>
+        <div class="min-w-0">
+          <h3 class={faqTitle}>{t("faq.moreTitle")}</h3>
+          <p class={faqBody}>{t("faq.moreSub")}</p>
+        </div>
+        <a class={btnPrimaryEnd} href={TELEGRAM_URL} target="_blank" rel="noreferrer">
+          {t("faq.moreCta")}
+        </a>
+      </article>
+    </div>
+  </div>
+</section>

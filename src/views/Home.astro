@@ -1,0 +1,195 @@
+---
+import FaqItem from "../components/faq/FaqItem.astro";
+import HowJourney from "../components/home/HowJourney.astro";
+import ShotCarousel from "../components/home/ShotCarousel.astro";
+import PhoneShot from "../components/shared/PhoneShot.astro";
+import StoreBadges from "../components/shared/StoreBadges.astro";
+import { getLang, localePath, useTranslations } from "../i18n/t";
+import {
+  appCard,
+  appCardAlt,
+  appCardFoot,
+  appCol,
+  apps,
+  badge,
+  badgeAlt,
+  benefitGlass,
+  benefitText,
+  benefitTitle,
+  benefits,
+  btnGhost,
+  btnOnDark,
+  btnPrimaryEnd,
+  check,
+  checkList,
+  checkRowStart,
+  faqBody,
+  faqCta,
+  faqTitle,
+  h2Flush,
+  hero,
+  heroCta,
+  heroGrid,
+  heroTitle,
+  lead,
+  phones,
+  sectionBrand,
+  sectionCta,
+  sectionJourney,
+  subOnNavy,
+  wrap,
+  wrapCenter,
+  wrapPad,
+} from "../lib/ui";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const venueHref = localePath(lang, "venue");
+const faqHref = localePath(lang, "faq");
+const partnerHref = localePath(lang, "venue#partner-contact");
+
+const guestShots = [
+  "/imgs/unemde/u-loadscreen.jpg",
+  "/imgs/unemde/u-login-l.jpg",
+  "/imgs/unemde/u-mainpage-l.jpg",
+  "/imgs/unemde/u-mappage-l.jpg",
+  "/imgs/unemde/u-restaurantpage-l.jpg",
+  "/imgs/unemde/u-mydeals-l.jpg",
+  "/imgs/unemde/u-completeddeals-l.jpg",
+  "/imgs/unemde/u-rating-l.jpg",
+];
+
+const venueShots = [
+  "/imgs/unemde-business/ub-loadscreen.jpg",
+  "/imgs/unemde-business/ub-login-l.jpg",
+  "/imgs/unemde-business/ub-restaurantdetails-l.jpg",
+  "/imgs/unemde-business/ub-restaurantdetailss-l.jpg",
+  "/imgs/unemde-business/ub-scanner-l.jpg",
+];
+---
+
+<section class={hero}>
+  <div class={`${wrap} ${heroGrid}`}>
+    <div>
+      <h1 class={heroTitle}>{t("hero.title")}</h1>
+      <p class={lead}>{t("hero.lead")}</p>
+      <div class={heroCta}>
+        <a class={btnGhost} href="#how">{t("hero.ctaGuest")}</a>
+        <a class={btnOnDark} href={venueHref}>{t("hero.ctaBiz")}</a>
+      </div>
+    </div>
+    <div class={phones} aria-hidden="true">
+      <PhoneShot src="/imgs/unemde/u-mappage-l.jpg" motion="a" />
+      <PhoneShot src="/imgs/unemde/u-restaurantpage-l.jpg" motion="b" />
+    </div>
+  </div>
+</section>
+
+<section class={`${sectionJourney} scroll-mt-[76px]`} id="how">
+  <div class={wrapCenter}>
+    <h2 class={h2Flush}>{t("how.homeTitle")}</h2>
+  </div>
+  <HowJourney />
+</section>
+
+<section class="scroll-mt-[76px] overflow-visible pt-6 pb-3" id="download">
+  <div class={wrapCenter}>
+    <h2 class={h2Flush}>{t("home.chooseTitle")}</h2>
+  </div>
+  <div class={`${wrap} ${apps}`}>
+    <article class={appCard}>
+      <div class={appCol}>
+        <h3 class="text-2xl font-bold">UNEMDE</h3>
+        <span class={`${badge} mt-3 w-fit`}>{t("apps.gTitle")}</span>
+        <ul class={checkList}>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.g1")}</span>
+          </li>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.g2")}</span>
+          </li>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.g3")}</span>
+          </li>
+        </ul>
+        <div class={appCardFoot}>
+          <StoreBadges />
+        </div>
+      </div>
+      <ShotCarousel shots={guestShots} />
+    </article>
+    <article class={appCardAlt}>
+      <div class={appCol}>
+        <h3 class="text-2xl font-bold">UNEMDE Business</h3>
+        <span class={`${badgeAlt} mt-3 w-fit`}>{t("apps.bTitle")}</span>
+        <ul class={checkList}>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.b1")}</span>
+          </li>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.b2")}</span>
+          </li>
+          <li class={checkRowStart}>
+            <span class={check}>✓</span>
+            <span>{t("apps.b3")}</span>
+          </li>
+        </ul>
+        <div class={appCardFoot}>
+          <a class={btnGhost} href={venueHref}>{t("home.more")}</a>
+        </div>
+      </div>
+      <ShotCarousel shots={venueShots} alt />
+    </article>
+  </div>
+</section>
+
+<section class={sectionBrand}>
+  <div class={wrapPad}>
+    <h2 class={h2Flush}>{t("partner.title")}</h2>
+    <p class={subOnNavy}>{t("partner.sub")}</p>
+    <div class={benefits}>
+      <article class={benefitGlass} data-aos="fade-up">
+        <h3 class={benefitTitle}>{t("partner.v1t")}</h3>
+        <p class={benefitText}>{t("partner.v1p")}</p>
+      </article>
+      <article class={benefitGlass} data-aos="fade-up" data-aos-delay="80">
+        <h3 class={benefitTitle}>{t("partner.v2t")}</h3>
+        <p class={benefitText}>{t("partner.v2p")}</p>
+      </article>
+      <article class={benefitGlass} data-aos="fade-up" data-aos-delay="160">
+        <h3 class={benefitTitle}>{t("partner.v3t")}</h3>
+        <p class={benefitText}>{t("partner.v3p")}</p>
+      </article>
+      <article class={benefitGlass} data-aos="fade-up" data-aos-delay="240">
+        <h3 class={benefitTitle}>{t("partner.v4t")}</h3>
+        <p class={benefitText}>{t("partner.v4p")}</p>
+      </article>
+    </div>
+    <div class={sectionCta}>
+      <a class={btnOnDark} href={partnerHref}>{t("home.partnerCta")}</a>
+    </div>
+  </div>
+</section>
+
+<section class="overflow-visible pt-10 pb-16">
+  <div class={wrapCenter}>
+    <h2 class={h2Flush}>{t("home.faqTitle")}</h2>
+  </div>
+  <div class={`${wrap} ${apps}`}>
+    <FaqItem q="faq.q1" a="faq.a1" alwaysOpen />
+    <FaqItem q="faq.q4" a="faq.a4" alwaysOpen />
+    <FaqItem q="faq.q11" a="faq.a11" alwaysOpen />
+    <article class={faqCta}>
+      <div class="min-w-0">
+        <h3 class={faqTitle}>{t("home.faqMoreTitle")}</h3>
+        <p class={faqBody}>{t("home.faqMoreSub")}</p>
+      </div>
+      <a class={btnPrimaryEnd} href={faqHref}>{t("home.faqAll")}</a>
+    </article>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 ---
 import { NAV_LINKS, type PageId } from "../../i18n/config";
+import { getLang, localePath, useTranslations } from "../../i18n/t";
 import { logoLink, wrap } from "../../lib/ui";
 import LangSwitch from "./LangSwitch.astro";
 import Logo from "./Logo.astro";
@@ -9,16 +10,20 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const homeHref = localePath(lang);
+const downloadHref = `${homeHref}#download`;
 ---
 
 <header
   class="sticky top-0 z-50 h-[60px] overflow-visible border-b border-transparent bg-white/92 backdrop-blur-[12px] transition-[border-color,box-shadow] duration-200 [view-transition-name:site-nav] data-scrolled:border-border data-scrolled:shadow-card"
   id="nav"
-  transition:persist="site-nav"
+  transition:persist={`site-nav-${lang}`}
 >
   <div class={`${wrap} flex h-full items-center justify-between gap-4`}>
     <div class="flex min-w-0 items-center gap-6">
-      <a class={logoLink} href="/" aria-label="UNEMDE">
+      <a class={logoLink} href={homeHref} aria-label="UNEMDE">
         <Logo gradId="navGrad" />
       </a>
       <nav
@@ -29,20 +34,18 @@ const { page } = Astro.props;
         NAV_LINKS.map((item) => (
           <a
             class="relative hover:text-blue-dark aria-[current=page]:text-blue-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-0 aria-[current=page]:after:-bottom-2 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-sm aria-[current=page]:after:bg-brand max-nav:w-full max-nav:rounded-2xl max-nav:px-4 max-nav:py-3 max-nav:hover:bg-blue-soft max-nav:hover:text-blue-dark max-nav:aria-[current=page]:bg-brand max-nav:aria-[current=page]:text-white max-nav:aria-[current=page]:after:hidden"
-            href={item.href}
+            href={localePath(lang, item.path)}
             aria-current={page === item.page ? "page" : undefined}
-            data-i18n={item.key}
           >
-            {item.label}
+            {t(item.key)}
           </a>
         ))
       }
       <a
         class="mt-1 hidden h-11 w-full items-center justify-center rounded-btn bg-green-grad px-4 text-center text-[13px] font-medium text-white shadow-card max-sm:flex"
-        href="/#download"
-        data-i18n="nav.cta"
+        href={downloadHref}
       >
-        Get the app
+        {t("nav.cta")}
       </a>
     </nav>
     </div>
@@ -50,16 +53,15 @@ const { page } = Astro.props;
       <LangSwitch />
       <a
         class="inline-flex h-9 items-center justify-center rounded-btn bg-green-grad px-4 text-center text-[13px] font-medium text-white shadow-card transition duration-200 hover:-translate-y-px max-sm:hidden"
-        href="/#download"
-        data-i18n="nav.cta"
+        href={downloadHref}
       >
-        Get the app
+        {t("nav.cta")}
       </a>
       <button
         class="group hidden size-9 flex-col items-center justify-center gap-[5px] rounded-full border border-border bg-bg-soft max-nav:flex"
         id="menuBtn"
         type="button"
-        aria-label="Menu"
+        aria-label={t("nav.menu")}
         aria-expanded="false"
         aria-controls="navLinks"
       >

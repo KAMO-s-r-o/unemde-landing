@@ -1,8 +1,10 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { ClientRouter } from "astro:transitions";
 import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
-import { PAGE_META, type PageId } from "../i18n/config";
+import { LANGS, PAGE_META, type PageId } from "../i18n/config";
+import { getLang, pathWithoutLocale, useTranslations } from "../i18n/t";
 import "../styles/global.css";
 
 interface Props {
@@ -10,21 +12,43 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 const meta = PAGE_META[page];
+const title = t(meta.titleKey);
+const description = t(meta.descKey);
+const path = pathWithoutLocale(Astro.url.pathname);
+const pathSeg = path === "/" ? "" : path.replace(/^\//, "");
+const canonical = new URL(getRelativeLocaleUrl(lang, pathSeg), Astro.site);
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UNEMDE</title>
-    <meta name="description" content="UNEMDE local deals" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {
+      LANGS.map((l) => (
+        <link
+          rel="alternate"
+          hreflang={l}
+          href={new URL(getRelativeLocaleUrl(l, pathSeg), Astro.site)}
+        />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(getRelativeLocaleUrl("ru", pathSeg), Astro.site)}
+    />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="theme-color" content="#004515" />
     <ClientRouter />
   </head>
-  <body data-page={page} data-title-key={meta.titleKey} data-desc-key={meta.descKey}>
+  <body data-page={page}>
     <div class="mx-auto flex min-h-dvh w-full min-w-[320px] max-w-[1440px] flex-col">
       <Header page={page} />
       <main class="flex-1">

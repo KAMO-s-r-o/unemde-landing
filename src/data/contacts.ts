@@ -8,3 +8,5 @@ export const TIKTOK_URL = "https://www.tiktok.com/@unemde?_r=1&_t=ZS-9AYBjA9atHT
 export const APPSTORE_URL = "https://apps.apple.com/app/";
 export const GOOGLEPLAY_URL = "https://play.google.com/store/apps/details?id=";
 export const ANDROID_APK_URL = "/downloads/unemde.apk";
+
+export const PRIVACY_URL = "https://unemde-landing.vercel.app/private-policy";
