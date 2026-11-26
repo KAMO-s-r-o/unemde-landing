@@ -1,5 +1,4 @@
 import {
-  ANDROID_APK_URL,
   APPSTORE_URL,
   GOOGLEPLAY_URL,
   SUPPORT_EMAIL,
@@ -14,7 +13,6 @@ const LOGO_PATH = "/icon.png";
 export function buildSiteJsonLd(site: URL | string, description: string) {
   const origin = new URL("/", site).origin;
   const logoUrl = new URL(LOGO_PATH, site).href;
-  const apkUrl = new URL(ANDROID_APK_URL, site).href;
   const orgId = `${origin}/#organization`;
   const appId = `${origin}/#mobile-app`;
 
@@ -63,8 +61,7 @@ export function buildSiteJsonLd(site: URL | string, description: string) {
           price: "0",
           priceCurrency: "KZT",
         },
-        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL].filter(Boolean),
-        downloadUrl: apkUrl,
+        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL],
         publisher: { "@id": orgId },
         author: { "@id": orgId },
       },

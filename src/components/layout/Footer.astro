@@ -13,10 +13,11 @@ const { page } = Astro.props;
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const homeHref = localePath(lang);
+const downloadHref = `${homeHref}#download`;
 ---
 
 <footer class="bg-blue-dark pt-8 pb-4 text-[13px] text-white/82" id="stores">
-  <div class={`${wrap} flex items-center gap-x-6 max-[600px]:items-start`}>
+  <div class={`${wrap} flex items-center justify-between gap-x-6 max-[600px]:items-start`}>
     <nav class="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-3 font-semibold max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-y-2.5">
       <a class={logoLink} href={homeHref} aria-label="UNEMDE">
         <Logo gradId="footGrad" light />
@@ -33,6 +34,12 @@ const homeHref = localePath(lang);
         ))
       }
     </nav>
+    <a
+      class="inline-flex h-9 shrink-0 items-center justify-center rounded-btn bg-white px-4 text-center text-[13px] font-medium text-blue-dark transition duration-200 hover:-translate-y-px hover:shadow-[0_8px_24px_rgb(0_69_21/0.2)]"
+      href={downloadHref}
+    >
+      {t("nav.cta")}
+    </a>
   </div>
   <div
     class={`${wrap} mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/12 pt-3 text-white/60 max-[600px]:flex-col max-[600px]:items-start`}
