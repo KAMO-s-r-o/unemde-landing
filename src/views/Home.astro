@@ -34,7 +34,6 @@ import {
   lead,
   phones,
   sectionBrand,
-  sectionCta,
   sectionJourney,
   subOnNavy,
   wrap,
@@ -46,7 +45,6 @@ const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const venueHref = localePath(lang, "venue");
 const faqHref = localePath(lang, "faq");
-const partnerHref = localePath(lang, "venue#partner-contact");
 
 const guestShots = [
   { src: "/imgs/unemde/u-loadscreen.jpg", alt: t("apps.gAlt1") },
@@ -169,9 +167,6 @@ const venueShots = [
         <h3 class={benefitTitle}>{t("partner.v4t")}</h3>
         <p class={benefitText}>{t("partner.v4p")}</p>
       </article>
-    </div>
-    <div class={sectionCta}>
-      <a class={btnOnDark} href={partnerHref}>{t("home.partnerCta")}</a>
     </div>
   </div>
 </section>

@@ -1,12 +1,8 @@
 import {
-  ANDROID_APK_URL,
   APPSTORE_URL,
   GOOGLEPLAY_URL,
-  INSTAGRAM_URL,
-  LINKEDIN_URL,
   SUPPORT_EMAIL,
   TELEGRAM_URL,
-  TIKTOK_URL,
   WHATSAPP_URL,
 } from "../data/contacts";
 import { SITE_NAME } from "../i18n/config";
@@ -17,7 +13,6 @@ const LOGO_PATH = "/icon.png";
 export function buildSiteJsonLd(site: URL | string, description: string) {
   const origin = new URL("/", site).origin;
   const logoUrl = new URL(LOGO_PATH, site).href;
-  const apkUrl = new URL(ANDROID_APK_URL, site).href;
   const orgId = `${origin}/#organization`;
   const appId = `${origin}/#mobile-app`;
 
@@ -35,7 +30,7 @@ export function buildSiteJsonLd(site: URL | string, description: string) {
         },
         image: logoUrl,
         email: SUPPORT_EMAIL,
-        sameAs: [LINKEDIN_URL, INSTAGRAM_URL, TIKTOK_URL, TELEGRAM_URL, WHATSAPP_URL],
+        sameAs: [TELEGRAM_URL, WHATSAPP_URL],
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -66,8 +61,7 @@ export function buildSiteJsonLd(site: URL | string, description: string) {
           price: "0",
           priceCurrency: "KZT",
         },
-        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL].filter(Boolean),
-        downloadUrl: apkUrl,
+        installUrl: [APPSTORE_URL, GOOGLEPLAY_URL],
         publisher: { "@id": orgId },
         author: { "@id": orgId },
       },
